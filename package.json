@@ -1,0 +1,19 @@
+{
+  "name": "movies-directory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/odelles/movies-directory.git"
+  },
+  "author": "odelles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/odelles/movies-directory/issues"
+  },
+  "homepage": "https://github.com/odelles/movies-directory#readme"
+}
