@@ -1,12 +1,12 @@
 const {
-    getMovieByName,
+    getMovieByTitle,
 } = require('../models/movies.model')
-function httpGetMovieByName(req, res) {
+function httpGetMovieByTitle(req, res) {
     console.log(req.query);
-    const name = req.query.name
-    const movie = getMovieByName(name);
+    const title = req.query.title
+    const movie = getMovieByTitle(title);
     return res.status(200).json(movie)
 }
 module.exports = {
-    httpGetMovieByName,
+    httpGetMovieByTitle,
 }
