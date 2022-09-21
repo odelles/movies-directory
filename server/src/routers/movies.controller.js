@@ -3,7 +3,7 @@ const {
 } = require('../models/movies.model')
 function httpGetMovieByTitle(req, res) {
     console.log(req.query);
-    const title = req.query.title
+    const title = req.query.title.toLowerCase()
     const movie = getMovieByTitle(title);
     return res.status(200).json(movie)
 }

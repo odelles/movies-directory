@@ -27,7 +27,7 @@ function loadMoviesData() {
 }
 function getMovieByTitle(title) {
     for (const movie of movies) {
-        if (movie.Film == title) {
+        if (movie.Film.toLowerCase() == title) {
             return movie;
         }
     }
