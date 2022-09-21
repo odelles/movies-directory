@@ -8,7 +8,6 @@ function loadMoviesData() {
     return new Promise((resolve, reject) => {
         fs.createReadStream(path.join(__dirname, '..', '..', 'Data', 'movies_metadata.csv'))
             .pipe(parse({
-                comment: '#',
                 columns: true,
             }))
             .on('data', (data) => {
@@ -20,14 +19,14 @@ function loadMoviesData() {
                 reject(error);
             })
             .on('end', () => {
-                console.log(movies);
+                console.log(movies.length);
                 resolve();
             });
     })
 }
 function getMovieByTitle(title) {
     for (const movie of movies) {
-        if (movie.Film.toLowerCase() == title) {
+        if (movie.title.toLowerCase() == title) {
             return movie;
         }
     }
