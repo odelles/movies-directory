@@ -6,7 +6,7 @@ const Movies = require('./movies.mongo');
 
 function loadMoviesData() {
     return new Promise((resolve, reject) => {
-        fs.createReadStream(path.join(__dirname, '..', '..', 'Data', 'v1-data', 'movies_metadata_1.csv'))
+        fs.createReadStream(path.join(__dirname, '..', '..', 'Data', 'movies_metadata_1.csv'))
             .pipe(parse({
                 columns: true,
             }))
