@@ -23,8 +23,13 @@ function loadMoviesData() {
             });
     })
 }
+async function findMovie(title) {
+    return await Movies.findOne({
+        title: title
+    });
+}
 async function getMovieByTitle(title) {
-    return await Movies.find({ title: title }, '-_id -__v');
+    return await Movies.find({ title: title.toLowerCase() }, '-_id -__v');
 }
 async function getMovies() {
     return await Movies.find({ rating: { $gte: 7 } }, '-_id -__v')
@@ -62,4 +67,5 @@ module.exports = {
     getMovieByTitle,
     loadMoviesData,
     getMovies,
+    findMovie,
 }
