@@ -2,16 +2,16 @@ const path = require('path');
 const fs = require('fs');
 
 const { parse } = require('csv-parse');
+const Movies = require('./movies.mongo');
 
-const movies = [];
 function loadMoviesData() {
     return new Promise((resolve, reject) => {
-        fs.createReadStream(path.join(__dirname, '..', '..', 'Data', 'movies_metadata.csv'))
+        fs.createReadStream(path.join(__dirname, '..', '..', 'Data', 'v1-data', 'movies_metadata_1.csv'))
             .pipe(parse({
                 columns: true,
             }))
             .on('data', (data) => {
-                movies.push(data);
+                saveMovie(data);
 
             })
             .on('error', (error) => {
@@ -19,20 +19,47 @@ function loadMoviesData() {
                 reject(error);
             })
             .on('end', () => {
-                console.log(movies.length);
                 resolve();
             });
     })
 }
-function getMovieByTitle(title) {
-    for (const movie of movies) {
-        if (movie.title.toLowerCase() == title) {
-            return movie;
-        }
+async function getMovieByTitle(title) {
+    return await Movies.find({ title: title }, '-_id -__v');
+}
+async function getMovies() {
+    return await Movies.find({ rating: { $gte: 7 } }, '-_id -__v')
+        .limit(30)
+}
+async function saveMovie(movie) {
+    try {
+        await Movies.updateOne({
+            rating: movie.vote_average,
+            title: movie.title.toLowerCase(),
+            overview: movie.overview,
+            genres: movie.genres,
+            production_companies: movie.production_companies,
+            poster: movie.poster,
+            runtime: movie.runtime
+
+        }, {
+            rating: movie.vote_average,
+            title: movie.title.toLowerCase(),
+            overview: movie.overview,
+            genres: movie.genres,
+            production_companies: movie.production_companies,
+            poster: movie.poster,
+            runtime: movie.runtime
+
+        }, {
+            upsert: true
+        })
+    } catch (err) {
+        console.log(`could not save movie ${err}`)
     }
 }
 
 module.exports = {
     getMovieByTitle,
     loadMoviesData,
+    getMovies,
 }
