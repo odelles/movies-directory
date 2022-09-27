@@ -33,25 +33,16 @@ async function getMovieByTitle(title) {
 }
 async function getMovies() {
     return await Movies.find({ rating: { $gte: 7 } }, '-_id -__v')
-        .limit(30)
+        .limit(30);
 }
 async function saveMovie(movie) {
     try {
-        await Movies.updateOne({
-            rating: movie.vote_average,
-            title: movie.title.toLowerCase(),
-            overview: movie.overview,
-            genres: movie.genres,
-            production_companies: movie.production_companies,
-            poster: movie.poster,
-            runtime: movie.runtime
-
+        await Movies.findOneAndUpdate({
+            title: movie.overview,
         }, {
             rating: movie.vote_average,
             title: movie.title.toLowerCase(),
             overview: movie.overview,
-            genres: movie.genres,
-            production_companies: movie.production_companies,
             poster: movie.poster,
             runtime: movie.runtime
 

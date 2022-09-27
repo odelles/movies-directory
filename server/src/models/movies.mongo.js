@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const moviesSchema = new mongoose.Schema({
     rating: {
         type: Number,
@@ -13,16 +12,8 @@ const moviesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    genres: {
-        type: [String],
-        required: true
-    },
     poster: {
         type: String,
-        required: true
-    },
-    production_companies: {
-        type: [String],
         required: true
     },
     runtime: {
