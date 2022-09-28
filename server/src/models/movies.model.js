@@ -39,6 +39,10 @@ async function saveMovie(movie) {
     try {
         await Movies.findOneAndUpdate({
             title: movie.overview,
+            rating: movie.vote_average,
+            title: movie.title.toLowerCase(),
+            poster: movie.poster,
+            runtime: movie.runtime
         }, {
             rating: movie.vote_average,
             title: movie.title.toLowerCase(),
