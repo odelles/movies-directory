@@ -35,20 +35,49 @@ async function getMovies() {
     return await Movies.find({ rating: { $gte: 7 } }, '-_id -__v')
         .limit(30);
 }
+async function getActionMovies(skip, limit) {
+    return await Movies.find({ 'genres.name': 'Action' }, '-_id -__v')
+        .skip(skip)
+        .limit(limit);
+}
+async function getThrillerMovies(skip, limit) {
+    return await Movies.find({ 'genres.name': 'Thriller' }, '-_id -__v')
+        .skip(skip)
+        .limit(limit);
+}
+async function getComedyMovies(skip, limit) {
+    return await Movies.find({ 'genres.name': 'Comedy' }, '-_id -__v')
+        .skip(skip)
+        .limit(limit);
+}
+async function getRomanceMovies(skip, limit) {
+    return await Movies.find({ 'genres.name': 'Romance' }, '-_id -__v')
+        .skip(skip)
+        .limit(limit);
+}
+async function getAdventureMovies(skip, limit) {
+    return await Movies.find({ 'genres.name': 'Adventure' }, '-_id -__v')
+        .skip(skip)
+        .limit(limit);
+}
+
 async function saveMovie(movie) {
     try {
         await Movies.findOneAndUpdate({
-            title: movie.overview,
-            rating: movie.vote_average,
-            title: movie.title.toLowerCase(),
-            poster: movie.poster,
-            runtime: movie.runtime
-        }, {
-            rating: movie.vote_average,
-            title: movie.title.toLowerCase(),
             overview: movie.overview,
+            rating: movie.vote_average,
+            title: movie.title.toLowerCase(),
             poster: movie.poster,
-            runtime: movie.runtime
+            runtime: movie.runtime,
+            genres: JSON.parse(movie.genres.replace(/'/g, '"')),
+
+        }, {
+            overview: movie.overview,
+            rating: movie.vote_average,
+            title: movie.title.toLowerCase(),
+            poster: movie.poster,
+            runtime: movie.runtime,
+            genres: JSON.parse(movie.genres.replace(/'/g, '"')),
 
         }, {
             upsert: true
@@ -63,4 +92,9 @@ module.exports = {
     loadMoviesData,
     getMovies,
     findMovie,
+    getActionMovies,
+    getAdventureMovies,
+    getComedyMovies,
+    getRomanceMovies,
+    getThrillerMovies,
 }
