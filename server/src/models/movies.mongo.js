@@ -9,16 +9,6 @@ const genresSchema = new mongoose.Schema({
         required: true
     }
 })
-const productionCompaniesSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true
-    },
-    name: {
-        type: String,
-        required: true
-    }
-})
 const moviesSchema = new mongoose.Schema({
     rating: {
         type: Number,
@@ -40,7 +30,6 @@ const moviesSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    productionCompanies: [productionCompaniesSchema],
     genres: [genresSchema]
 
 
