@@ -35,25 +35,30 @@ async function getMovies() {
     return await Movies.find({ rating: { $gte: 7 } }, '-_id -__v')
         .limit(30);
 }
-async function getActionMovies() {
+async function getActionMovies(skip, limit) {
     return await Movies.find({ 'genres.name': 'Action' }, '-_id -__v')
-        .limit(3);
+        .skip(skip)
+        .limit(limit);
 }
-async function getThrillerMovies() {
+async function getThrillerMovies(skip, limit) {
     return await Movies.find({ 'genres.name': 'Thriller' }, '-_id -__v')
-        .limit(3);
+        .skip(skip)
+        .limit(limit);
 }
-async function getComedyMovies() {
+async function getComedyMovies(skip, limit) {
     return await Movies.find({ 'genres.name': 'Comedy' }, '-_id -__v')
-        .limit(3);
+        .skip(skip)
+        .limit(limit);
 }
-async function getRomanceMovies() {
+async function getRomanceMovies(skip, limit) {
     return await Movies.find({ 'genres.name': 'Romance' }, '-_id -__v')
-        .limit(3);
+        .skip(skip)
+        .limit(limit);
 }
-async function getAdventureMovies() {
+async function getAdventureMovies(skip, limit) {
     return await Movies.find({ 'genres.name': 'Adventure' }, '-_id -__v')
-        .limit(3);
+        .skip(skip)
+        .limit(limit);
 }
 
 async function saveMovie(movie) {
