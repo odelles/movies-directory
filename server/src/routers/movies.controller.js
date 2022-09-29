@@ -2,6 +2,11 @@ const {
     getMovieByTitle,
     getMovies,
     findMovie,
+    getActionMovies,
+    getAdventureMovies,
+    getRomanceMovies,
+    getComedyMovies,
+    getThrillerMovies
 } = require('../models/movies.model')
 async function httpGetMovieByTitle(req, res) {
     console.log(req.query);
@@ -24,7 +29,32 @@ async function httpGetMovies(req, res) {
     const movies = await getMovies();
     return res.status(200).json(movies);
 }
+async function httpGetActionMovies(req, res) {
+    const actionMovies = await getActionMovies();
+    return res.status(200).json(actionMovies);
+}
+async function httpGetAdventureMovies(req, res) {
+    const adventureMovies = await getAdventureMovies();
+    return res.status(200).json(adventureMovies);
+}
+async function httpGetRomanceMovies(req, res) {
+    const romanceMovies = await getRomanceMovies();
+    return res.status(200).json(romanceMovies);
+}
+async function httpGetThrillerMovies(req, res) {
+    const thrillerMovies = await getThrillerMovies();
+    return res.status(200).json(thrillerMovies);
+}
+async function httpGetComedyMovies(req, res) {
+    const comedyMovies = await getComedyMovies();
+    return res.status(200).json(comedyMovies);
+}
 module.exports = {
     httpGetMovieByTitle,
     httpGetMovies,
+    httpGetActionMovies,
+    httpGetAdventureMovies,
+    httpGetComedyMovies,
+    httpGetRomanceMovies,
+    httpGetThrillerMovies,
 }
