@@ -1,4 +1,24 @@
 const mongoose = require('mongoose');
+const genresSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    }
+})
+const productionCompaniesSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    }
+})
 const moviesSchema = new mongoose.Schema({
     rating: {
         type: Number,
@@ -19,7 +39,10 @@ const moviesSchema = new mongoose.Schema({
     runtime: {
         type: Number,
         required: true,
-    }
+    },
+    productionCompanies: [productionCompaniesSchema],
+    genres: [genresSchema]
+
 
 });
 module.exports = mongoose.model('Movies', moviesSchema);
