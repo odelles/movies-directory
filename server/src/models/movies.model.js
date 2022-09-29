@@ -38,17 +38,21 @@ async function getMovies() {
 async function saveMovie(movie) {
     try {
         await Movies.findOneAndUpdate({
-            title: movie.overview,
-            rating: movie.vote_average,
-            title: movie.title.toLowerCase(),
-            poster: movie.poster,
-            runtime: movie.runtime
-        }, {
-            rating: movie.vote_average,
-            title: movie.title.toLowerCase(),
             overview: movie.overview,
+            rating: movie.vote_average,
+            title: movie.title.toLowerCase(),
             poster: movie.poster,
-            runtime: movie.runtime
+            runtime: movie.runtime,
+            genres: JSON.parse(movie.genres.replace(/'/g, '"')),
+            productionCompanies: JSON.parse(movie.genres.replace(/'/g, '"'))
+        }, {
+            overview: movie.overview,
+            rating: movie.vote_average,
+            title: movie.title.toLowerCase(),
+            poster: movie.poster,
+            runtime: movie.runtime,
+            genres: JSON.parse(movie.genres.replace(/'/g, '"')),
+            productionCompanies: JSON.parse(movie.genres.replace(/'/g, '"'))
 
         }, {
             upsert: true
