@@ -1,5 +1,5 @@
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
 
 const { parse } = require('csv-parse');
 const Movies = require('./movies.mongo');
@@ -36,27 +36,52 @@ async function getMovies() {
         .limit(30);
 }
 async function getActionMovies(skip, limit) {
-    return await Movies.find({ 'genres.name': 'Action' }, '-_id -__v')
+    return await Movies.find({ 'genres.name': 'Action' }, {
+        '_id': 0,
+        '__v': 0,
+        'genres._id': 0,
+
+    })
         .skip(skip)
         .limit(limit);
 }
 async function getThrillerMovies(skip, limit) {
-    return await Movies.find({ 'genres.name': 'Thriller' }, '-_id -__v')
+    return await Movies.find({ 'genres.name': 'Thriller' }, {
+        '_id': 0,
+        '__v': 0,
+        'genres._id': 0,
+
+    })
         .skip(skip)
         .limit(limit);
 }
 async function getComedyMovies(skip, limit) {
-    return await Movies.find({ 'genres.name': 'Comedy' }, '-_id -__v')
+    return await Movies.find({ 'genres.name': 'Comedy' }, {
+        '_id': 0,
+        '__v': 0,
+        'genres._id': 0,
+
+    })
         .skip(skip)
         .limit(limit);
 }
 async function getRomanceMovies(skip, limit) {
-    return await Movies.find({ 'genres.name': 'Romance' }, '-_id -__v')
+    return await Movies.find({ 'genres.name': 'Romance' }, {
+        '_id': 0,
+        '__v': 0,
+        'genres._id': 0,
+
+    })
         .skip(skip)
         .limit(limit);
 }
 async function getAdventureMovies(skip, limit) {
-    return await Movies.find({ 'genres.name': 'Adventure' }, '-_id -__v')
+    return await Movies.find({ 'genres.name': 'Adventure' }, {
+        '_id': 0,
+        '__v': 0,
+        'genres._id': 0,
+
+    })
         .skip(skip)
         .limit(limit);
 }
